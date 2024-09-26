@@ -11,5 +11,5 @@ public class Reservation
 
     // Navigation properties
     public Prona Property { get; set; }
-    public UserTable Buyer { get; set; }
+    public User Buyer { get; set; }
 }

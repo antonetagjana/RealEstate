@@ -1,101 +1,52 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data; 
-using WebApplication2.models; 
+using WebApplication2.models;
+using WebApplication2.Services.PropertyPhoto;
 
 namespace WebApplication2.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class PropertyPhotoController : ControllerBase
+    [Route("api/[controller]")]
+    public class PropertyPhotoController(IPropertyPhotoService propertyPhotoService) : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public PropertyPhotoController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/PropertyPhoto
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PropertyPhoto>>> GetPropertyPhotos()
-        {
-            return await _context.PropertyPhotos.ToListAsync();
-        }
-
-        // GET: api/PropertyPhoto/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PropertyPhoto>> GetPropertyPhoto(Guid id)
+        public async Task<IActionResult> GetPropertyPhotoById(Guid id)
         {
-            var propertyPhoto = await _context.PropertyPhotos.FindAsync(id);
-
-            if (propertyPhoto == null)
-            {
-                return NotFound();
-            }
-
-            return propertyPhoto;
+            var photo = await propertyPhotoService.GetByIdAsync(id);
+            if (photo == null) return NotFound();
+            return Ok(photo);
         }
 
-        // PUT: api/PropertyPhoto/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPropertyPhoto(Guid id, PropertyPhoto propertyPhoto)
+        [HttpGet]
+        public async Task<IActionResult> GetAllPropertyPhotos()
         {
-            if (id != propertyPhoto.PhotoId)
-            {
-                return BadRequest();
-            }
+            var photos = await propertyPhotoService.GetAllAsync();
+            return Ok(photos);
+        }
 
-            _context.Entry(propertyPhoto).State = EntityState.Modified;
+        [HttpPost]
+        public async Task<IActionResult> CreatePropertyPhoto(PropertyPhoto propertyPhoto)
+        {
+            await propertyPhotoService.AddAsync(propertyPhoto);
+            return CreatedAtAction(nameof(GetPropertyPhotoById), new { id = propertyPhoto.PhotoId }, propertyPhoto);
+        }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PropertyPhotoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePropertyPhoto(Guid id, PropertyPhoto propertyPhoto)
+        {
+            if (id != propertyPhoto.PhotoId) return BadRequest();
 
+            await propertyPhotoService.UpdateAsync(propertyPhoto);
             return NoContent();
         }
 
-        // POST: api/PropertyPhoto
-        [HttpPost]
-        public async Task<ActionResult<PropertyPhoto>> PostPropertyPhoto(PropertyPhoto propertyPhoto)
-        {
-            _context.PropertyPhotos.Add(propertyPhoto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetPropertyPhoto), new { id = propertyPhoto.PhotoId }, propertyPhoto);
-        }
-
-        // DELETE: api/PropertyPhoto/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePropertyPhoto(Guid id)
         {
-            var propertyPhoto = await _context.PropertyPhotos.FindAsync(id);
-            if (propertyPhoto == null)
-            {
-                return NotFound();
-            }
-
-            _context.PropertyPhotos.Remove(propertyPhoto);
-            await _context.SaveChangesAsync();
-
+            await propertyPhotoService.DeleteAsync(id);
             return NoContent();
         }
-
-        private bool PropertyPhotoExists(Guid id)
-        {
-            return _context.PropertyPhotos.Any(e => e.PhotoId == id);
-        }
     }
+
 }

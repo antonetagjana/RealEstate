@@ -1,101 +1,59 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WebApplication2.Data; 
-using WebApplication2.models; 
+using WebApplication2.models;
+using WebApplication2.Services.Reservation;
 
-namespace WebApplication2.Controllers
+namespace WebApplication2.controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ReservationController(IReservationService reservationService) : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ReservationController : ControllerBase
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetReservationById(Guid id)
     {
-        private readonly ApplicationDbContext _context;
+        var reservation = await reservationService.GetByIdAsync(id);
+        if (reservation == null) return NotFound();
+        return Ok(reservation);
+    }
 
-        public ReservationController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAllReservations()
+    {
+        var reservations = await reservationService.GetAllAsync();
+        return Ok(reservations);
+    }
 
-        // GET: api/Reservation
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reservation>>> GetReservations()
-        {
-            return await _context.Reservations.ToListAsync();
-        }
+    [HttpPost]
+    public async Task<IActionResult> CreateReservation([FromBody] Reservation reservation)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-        // GET: api/Reservation/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Reservation>> GetReservation(Guid id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
+        await reservationService.AddAsync(reservation);
+        return CreatedAtAction(nameof(GetReservationById), new { id = reservation.ReservationId }, reservation);
+    }
 
-            if (reservation == null)
-            {
-                return NotFound();
-            }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateReservation(Guid id, [FromBody] Reservation reservation)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
-            return reservation;
-        }
+        if (id != reservation.ReservationId)
+            return BadRequest("Reservation ID mismatch");
 
-        // PUT: api/Reservation/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutReservation(Guid id, Reservation reservation)
-        {
-            if (id != reservation.ReservationId)
-            {
-                return BadRequest();
-            }
+        await reservationService.UpdateAsync(reservation);
+        return NoContent();
+    }
 
-            _context.Entry(reservation).State = EntityState.Modified;
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteReservation(Guid id)
+    {
+        var reservation = await reservationService.GetByIdAsync(id);
+        if (reservation == null)
+            return NotFound();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ReservationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Reservation
-        [HttpPost]
-        public async Task<ActionResult<Reservation>> PostReservation(Reservation reservation)
-        {
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetReservation), new { id = reservation.ReservationId }, reservation);
-        }
-
-        // DELETE: api/Reservation/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReservation(Guid id)
-        {
-            var reservation = await _context.Reservations.FindAsync(id);
-            if (reservation == null)
-            {
-                return NotFound();
-            }
-
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool ReservationExists(Guid id)
-        {
-            return _context.Reservations.Any(e => e.ReservationId == id);
-        }
+        await reservationService.DeleteAsync(id);
+        return NoContent();
     }
 }

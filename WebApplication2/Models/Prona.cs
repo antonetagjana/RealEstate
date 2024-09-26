@@ -24,7 +24,7 @@ public class Prona
     public DateTime CreatedDate { get; set; } = DateTime.Now;
 
     // Navigation properties
-    public UserTable User { get; set; } // Navigation back to User
+    public User User { get; set; } // Navigation back to User
     public ICollection<PropertyPhoto> Photos { get; set; } = new List<PropertyPhoto>();
     public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 }

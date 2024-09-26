@@ -4,9 +4,17 @@ using WebApplication2.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using WebApplication2.Services; // Sigurohuni që të përdorni namespace të saktë për ServiceRegistry
+using Lamar;
+using Lamar.Microsoft.DependencyInjection;
+using WebApplication2.Registers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Perdorimi i Lamar dependecy injection
+builder.Host.UseLamar((context, registry) =>
+{
+    registry.IncludeRegistry<WebApplication2.Registers.ServiceRegistry>();
+});
 
 // Key sekrete për nënshkrimin e JWT
 var key = Encoding.ASCII.GetBytes("Ky është çelësi sekret për JWT");
@@ -38,7 +46,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
+    ServiceLifetime.Scoped);
 
 var app = builder.Build();
 
@@ -53,13 +62,10 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
         c.RoutePrefix = string.Empty;  // Swagger do të jetë në root
     });
 }
-
 app.UseHttpsRedirection();
 app.UseMiddleware<LoggingMiddleware>();
 
 // Middleware për autentifikimin dhe autorizimin
 app.UseAuthentication();
-app.UseAuthorization();
-
 app.MapControllers();
 app.Run();

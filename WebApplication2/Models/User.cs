@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication2.models;
 
-public class UserTable
+public class User
 {
     public Guid UserId { get; set; }
     [MaxLength(255)]

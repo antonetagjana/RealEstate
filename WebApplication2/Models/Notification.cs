@@ -12,5 +12,5 @@ public class Notification
     public DateTime CreatedDate { get; set; } = DateTime.Now;
 
     // Navigation properties
-    public UserTable User { get; set; }
+    public User User { get; set; }
 }

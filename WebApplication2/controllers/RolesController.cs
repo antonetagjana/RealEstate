@@ -1,101 +1,55 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.models; 
-using WebApplication2.Data; 
+using WebApplication2.Data;
+using WebApplication2.DTOs;
+using WebApplication2.Services.Role;
 
 namespace WebApplication2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class RolesController(IRoleService roleService) : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public RolesController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/Roles
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
-        {
-            return await _context.Roles.ToListAsync(); 
-        }
-
-        // GET: api/Roles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Role>> GetRole(Guid id) 
+        public async Task<IActionResult> GetRoleById(Guid id)
         {
-            var role = await _context.Roles.FindAsync(id);
-
-            if (role == null)
-            {
-                return NotFound();
-            }
-
-            return role;
+            var role = await roleService.GetRoleByIdAsync(id);
+            return Ok(role);
         }
 
-        // PUT: api/Roles/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRole(Guid id, Role role) 
+        [HttpGet]
+        public async Task<IActionResult> GetAllRoles()
         {
-            if (id != role.RoleId)
-            {
-                return BadRequest();
-            }
+            var roles = await roleService.GetAllRolesAsync();
+            return Ok(roles);
+        }
 
-            _context.Entry(role).State = EntityState.Modified;
-
-            try
+        [HttpPost]
+        public async Task<IActionResult> CreateRole(RoleCreateDTO roleCreateDto)
+        {
+            var role = new Role
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RoleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                RoleId = roleCreateDto.RoleId,
+                RoleName = roleCreateDto.RoleName
+            };
+            await roleService.AddRoleAsync(role);
+            return CreatedAtAction(nameof(GetRoleById), new { id = role.RoleId }, role);
+        }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateRole(Guid id, RoleUpdateDTO roleUpdateDto)
+        {
+            await roleService.UpdateRoleAsync(id, roleUpdateDto);
             return NoContent();
         }
 
-        // POST: api/Roles
-        [HttpPost]
-        public async Task<ActionResult<Role>> PostRole(Role role)
-        {
-            _context.Roles.Add(role);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetRole), new { id = role.RoleId }, role);
-        }
-
-        // DELETE: api/Roles/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(Guid id)
         {
-            var role = await _context.Roles.FindAsync(id);
-            if (role == null)
-            {
-                return NotFound();
-            }
-
-            _context.Roles.Remove(role);
-            await _context.SaveChangesAsync();
-
+            await roleService.DeleteRoleAsync(id);
             return NoContent();
         }
-
-        private bool RoleExists(Guid id) 
-        {
-            return _context.Roles.Any(e => e.RoleId == id);
-        }
     }
+
 }
