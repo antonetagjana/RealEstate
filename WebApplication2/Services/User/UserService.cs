@@ -14,7 +14,7 @@ public class UserService(IUserRepository userRepository) : IUserService
     {
         return userRepository.GetAllAsync();
     }
-
+  
     public Task AddUserAsync(User user)
     {
         return userRepository.AddAsync(user);

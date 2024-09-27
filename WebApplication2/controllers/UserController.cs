@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
+using WebApplication2.DTOs;
 using WebApplication2.models;
 using WebApplication2.Services.User;
+
 
 
 namespace WebApplication2.Controllers
@@ -27,8 +29,17 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(User user)
+        public async Task<IActionResult> CreateUser(UserCreateDto userCreateDto)
+
         {
+            var user = new User
+            {
+                UserId = userCreateDto.UserId,
+                FullName = userCreateDto.FullName,
+                Email = userCreateDto.Email,
+                PasswordHash = userCreateDto.PasswordHash,
+                PhoneNumber = userCreateDto.PhoneNumber,
+            };
             await userService.AddUserAsync(user);
             return CreatedAtAction(nameof(GetUserById), new { id = user.UserId }, user);
         }

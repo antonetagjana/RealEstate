@@ -23,7 +23,7 @@ public class ApplicationDbContext : DbContext
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
-    // UserTable Config
+    
     modelBuilder.Entity<User>()
         .HasKey(u => u.UserId);
 
@@ -32,7 +32,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .IsRequired()
         .HasMaxLength(255);
 
-    // Ensure Email is indexed for performance and unique
     modelBuilder.Entity<User>()
         .HasIndex(u => u.Email)
         .IsUnique();
@@ -46,7 +45,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .HasMany(u => u.Reservations)
         .WithOne(r => r.Buyer)
         .HasForeignKey(r => r.BuyerId)
-        .OnDelete(DeleteBehavior.Restrict);  // Prevent cascade delete here
+        .OnDelete(DeleteBehavior.Restrict);  
 
     modelBuilder.Entity<User>()
         .HasMany(u => u.Notifications)
@@ -68,8 +67,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         new Role { RoleId = Guid.NewGuid(), RoleName = "User" }
     );
 
-
-    // UserRole (Join Table) Config
     modelBuilder.Entity<UserRole>()
         .HasKey(ur => new { ur.UserId, ur.RoleId });
 
@@ -85,7 +82,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .HasForeignKey(ur => ur.RoleId)
         .OnDelete(DeleteBehavior.Cascade);
 
-    // Property Config
     modelBuilder.Entity<Prona>()
         .HasKey(p => p.PropertyId);
 
@@ -98,13 +94,11 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .HasMany(p => p.Reservations)
         .WithOne(r => r.Property)
         .HasForeignKey(r => r.PropertyId)
-        .OnDelete(DeleteBehavior.Cascade);  // Allow cascade delete here
+        .OnDelete(DeleteBehavior.Cascade);  
 
-    // PropertyPhoto Config
     modelBuilder.Entity<PropertyPhoto>()
         .HasKey(pp => pp.PhotoId);
 
-    // Reservation Config
     modelBuilder.Entity<Reservation>()
         .HasKey(r => r.ReservationId);
 
@@ -112,8 +106,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .Property(r => r.Status)
         .IsRequired()
         .HasMaxLength(50);
-
-    // Notification Config
     modelBuilder.Entity<Notification>()
         .HasKey(n => n.NotificationId);
 }

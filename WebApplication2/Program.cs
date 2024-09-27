@@ -7,41 +7,17 @@ using System.Text;
 using Lamar;
 using Lamar.Microsoft.DependencyInjection;
 using WebApplication2.Registers;
+//using WebApplication2.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Perdorimi i Lamar dependecy injection
+
 builder.Host.UseLamar((context, registry) =>
 {
     registry.IncludeRegistry<WebApplication2.Registers.ServiceRegistry>();
 });
 
-// Key sekrete për nënshkrimin e JWT
-var key = Encoding.ASCII.GetBytes("Ky është çelësi sekret për JWT");
 
-// Shto shërbimin për autentifikimin me JWT
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = "https://yourdomain.com",  // Zëvendëso me domain-in tënd
-        ValidAudience = "https://yourdomain.com", // Zëvendëso me domain-in tënd
-        IssuerSigningKey = new SymmetricSecurityKey(key)
-    };
-});
-
-// Shto controllers dhe shërbime të tjera
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -51,21 +27,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
-// Konfigurimi i pipeline për kërkesat HTTP
+//app.UseMiddleware<RequestLoggingMiddleware>();
+
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        c.RoutePrefix = string.Empty;  // Swagger do të jetë në root
+        c.RoutePrefix = string.Empty;  
     });
 }
-app.UseHttpsRedirection();
-app.UseMiddleware<LoggingMiddleware>();
-
-// Middleware për autentifikimin dhe autorizimin
-app.UseAuthentication();
 app.MapControllers();
 app.Run();
