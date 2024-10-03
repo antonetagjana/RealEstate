@@ -1,60 +1,132 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication2.DTOs;
 using WebApplication2.models;
 using WebApplication2.Services.Property;
+using WebApplication2.Services.User;
 
-namespace WebApplication2.Controllers;
-
-
-[ApiController]
-[Route("api/[controller]")]
-public class PropertyController(IPropertyService propertyService) : ControllerBase
-{
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetPropertyById(Guid id)
+namespace WebApplication2.Controllers
+{   [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
+    
+    public class PropertyController : ControllerBase
     {
-        var property = await propertyService.GetByIdAsync(id);
-        if (property == null) return NotFound();
-        return Ok(property);
-    }
+        private readonly IPropertyService _propertyService;
+        private readonly IUserService _userService;
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllProperties()
-    {
-        var properties = await propertyService.GetAllAsync();
-        return Ok(properties);
-    }
+        public PropertyController(IPropertyService propertyService)
+        {
+            _propertyService = propertyService;
+            _userService = _userService;
+        }
+        [Authorize(Policy = "AuthenticatedUserPolicy")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPropertyById(Guid id)
+        {
+            var property = await _propertyService.GetByIdAsync(id);
+            if (property == null) return NotFound();
+            
+            // Kontrollo nëse përdoruesi është Seller dhe ka akses në këtë pronë
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (property.UserId != Guid.Parse(currentUserId) && !User.IsInRole("Admin"))
+            {
+                return Forbid("Nuk keni të drejtë të shihni këtë pronë.");
+            }
+            
+            return Ok(property);
+        }
+        [Authorize(Policy = "AuthenticatedUserPolicy")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllProperties()
+        {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-    [HttpPost]
-    public async Task<IActionResult> CreateProperty([FromBody] Prona property)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+            if (User.IsInRole("Seller"))
+            {
+                // Filtro pronat vetëm për Seller-in e loguar
+                var properties = await _propertyService.GetPropertiesBySellerIdAsync(Guid.Parse(currentUserId));
+                return Ok(properties);
+            }
 
-        await propertyService.AddAsync(property);
-        return CreatedAtAction(nameof(GetPropertyById), new { id = property.PropertyId }, property);
-    }
+            // Admin ose Buyer mund të shohin të gjitha pronat
+            var allProperties = await _propertyService.GetAllAsync();
+            return Ok(allProperties);
+        }
+        [Authorize(Policy = "MustBeAdminOrSeller")]
+        [HttpPost]
+        public async Task<IActionResult> CreateProperty( PropertyCreateDTO propertyCreateDto)
+        {
+            var property = new Prona
+            {
+                UserId = propertyCreateDto.UserId,
+                Title = propertyCreateDto.Title,
+                Description = propertyCreateDto.Description,
+                Category = propertyCreateDto.Category,
+                Location = propertyCreateDto.Location,
+                Price = propertyCreateDto.Price,
+                SurfaceArea = propertyCreateDto.SurfaceArea,
+                Floors = propertyCreateDto.Floors,
+                IsAvailable = propertyCreateDto.IsAvailable,
+                IsPromoted = propertyCreateDto.IsPromoted,
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateProperty(Guid id, [FromBody] Prona property)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+            };
 
-        if (id != property.PropertyId)
-            return BadRequest("Property ID mismatch");
+            await _propertyService.AddPropertyAsync(property);
 
-        await propertyService.UpdateAsync(property);
-        return NoContent();
-    }
+            return CreatedAtAction(nameof(GetPropertyById), new { id = property.PropertyId }, property);
+        }
+        
+        [Authorize(Policy = "MustBeAdminOrSeller")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProperty(Guid id, [FromBody] Prona prona)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteProperty(Guid id)
-    {
-        var property = await propertyService.GetByIdAsync(id);
-        if (property == null)
-            return NotFound();
+            // Merr pronën nga databaza për ta kontrolluar
+            var property = await _propertyService.GetByIdAsync(id);
+            if (property == null)
+                return NotFound("Property not found");
 
-        await propertyService.DeleteAsync(id);
-        return NoContent();
+            // Kontrollo nëse Property ID përputhet
+            if (id != property.PropertyId)
+                return BadRequest("Property ID mismatch");
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Merr ID-në e përdoruesit të loguar
+
+            // Kontrollo nëse përdoruesi është admin ose pronari i pronës
+            if (property.UserId != Guid.Parse(currentUserId) && !User.IsInRole("Admin"))
+            {
+                return Forbid("You are not authorized to update this property."); // Ndalim për përdoruesit që nuk kanë të drejta
+            }
+
+            // Përditëso pronën
+            property.Title = prona.Title;
+            property.Description = prona.Description;
+            property.Location = prona.Location;
+            property.Price = prona.Price;
+            property.SurfaceArea = prona.SurfaceArea;
+            property.IsAvailable = prona.IsAvailable;
+            property.IsPromoted = prona.IsPromoted;
+            property.Floors= prona.Floors;
+            // Shënim: Vendos të gjitha fushat e tjera që dëshiron të përditësohen
+
+            await _propertyService.UpdateAsync(property);
+            return NoContent();
+        }
+        
+        [Authorize(Policy = "MustBeAdminOrSeller")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProperty(Guid id)
+        {
+            var property = await _propertyService.GetByIdAsync(id);
+            if (property == null)
+                return NotFound();
+
+            await _propertyService.DeleteAsync(id);
+            return NoContent();
+        }
     }
 }

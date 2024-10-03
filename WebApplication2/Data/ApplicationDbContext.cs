@@ -38,13 +38,13 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
     modelBuilder.Entity<User>()
         .HasMany(u => u.Properties)
-        .WithOne(p => p.User)
+        .WithOne(p => p.user)
         .HasForeignKey(p => p.UserId);
 
     modelBuilder.Entity<User>()
         .HasMany(u => u.Reservations)
-        .WithOne(r => r.Buyer)
-        .HasForeignKey(r => r.BuyerId)
+        .WithOne(r => r.User)
+        .HasForeignKey(r => r.UserId)
         .OnDelete(DeleteBehavior.Restrict);  
 
     modelBuilder.Entity<User>()
@@ -60,13 +60,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .Property(r => r.RoleName)
         .IsRequired()
         .HasMaxLength(50);
-
-
-    modelBuilder.Entity<Role>().HasData(
-        new Role { RoleId = Guid.NewGuid(), RoleName = "Admin" },
-        new Role { RoleId = Guid.NewGuid(), RoleName = "User" }
-    );
-
     modelBuilder.Entity<UserRole>()
         .HasKey(ur => new { ur.UserId, ur.RoleId });
 
@@ -95,6 +88,12 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         .WithOne(r => r.Property)
         .HasForeignKey(r => r.PropertyId)
         .OnDelete(DeleteBehavior.Cascade);  
+ 
+    modelBuilder.Entity<Prona>()
+        .HasOne(p => p.user)
+        .WithMany(u => u.Properties)
+        .HasForeignKey(p => p.UserId)
+        .OnDelete(DeleteBehavior.Restrict);
 
     modelBuilder.Entity<PropertyPhoto>()
         .HasKey(pp => pp.PhotoId);

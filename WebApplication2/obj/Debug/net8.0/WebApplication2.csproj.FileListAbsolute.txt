@@ -145,3 +145,4 @@ C:\Users\User\Desktop\RealEstateProject\WebApplication2\WebApplication2\obj\Debu
 C:\Users\User\Desktop\RealEstateProject\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.pdb
 C:\Users\User\Desktop\RealEstateProject\WebApplication2\WebApplication2\obj\Debug\net8.0\WebApplication2.genruntimeconfig.cache
 C:\Users\User\Desktop\RealEstateProject\WebApplication2\WebApplication2\obj\Debug\net8.0\ref\WebApplication2.dll
+C:\Users\User\Desktop\RealEstateProject\WebApplication2\WebApplication2\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
 
-/*
+
 namespace WebApplication2.Middleware;
 
 public class RequestLoggingMiddleware
@@ -30,4 +30,4 @@ public class RequestLoggingMiddleware
 
     await _next(context);
   }
-}*/
+}

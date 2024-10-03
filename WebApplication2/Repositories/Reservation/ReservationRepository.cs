@@ -9,7 +9,7 @@ public class ReservationRepository(ApplicationDbContext dbContext) : IReservatio
     public async Task<Reservation?> GetByIdAsync(Guid reservationId)
     {
         return await dbContext.Reservations.Include(r => r.Property)
-            .Include(r => r.Buyer)
+            .Include(r => r.User)
             .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
     }
 

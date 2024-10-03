@@ -4,30 +4,48 @@ using WebApplication2.models;
 
 namespace WebApplication2.Repositories.Property;
 
-public class PropertyRepository(ApplicationDbContext dbContext) : IPropertyRepository
+public class PropertyRepository : IPropertyRepository
 {
+    private readonly ApplicationDbContext _dbContext;
+
+    public PropertyRepository(ApplicationDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    public Task saveChanges()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<Prona>> GetPropertiesBySellerIdAsync(Guid sellerId)
+    {
+        // Merr të gjitha pronat ku UserId është sellerId
+        return await _dbContext.Properties
+            .Where(p => p.UserId == sellerId)  // Filtro bazuar në ID-në e Seller-it
+            .ToListAsync();
+    }
+
     public async Task<Prona?> GetByIdAsync(Guid propertyId)
     {
-        return await dbContext.Properties.Include(p => p.Photos)
-            .Include(p => p.Reservations)
-            .FirstOrDefaultAsync(p => p.PropertyId == propertyId);
+        return await _dbContext.Properties.FindAsync(propertyId);
     }
 
     public async Task<IEnumerable<Prona>> GetAllAsync()
     {
-        return await dbContext.Properties.ToListAsync();
+        return await _dbContext.Properties.ToListAsync();
     }
 
     public async Task AddAsync(Prona property)
     {
-        await dbContext.Properties.AddAsync(property);
-        await dbContext.SaveChangesAsync();
+        await _dbContext.Properties.AddAsync(property);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task UpdateAsync(Prona property)
     {
-        dbContext.Properties.Update(property);
-        await dbContext.SaveChangesAsync();
+        _dbContext.Properties.Update(property);
+        await _dbContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Guid propertyId)
@@ -35,8 +53,8 @@ public class PropertyRepository(ApplicationDbContext dbContext) : IPropertyRepos
         var property = await GetByIdAsync(propertyId);
         if (property != null)
         {
-            dbContext.Properties.Remove(property);
-            await dbContext.SaveChangesAsync();
+            _dbContext.Properties.Remove(property);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

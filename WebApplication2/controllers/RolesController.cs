@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.models; 
@@ -7,6 +8,7 @@ using WebApplication2.Services.Role;
 
 namespace WebApplication2.Controllers
 {
+    [Authorize(Policy = "AdminPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController(IRoleService roleService) : ControllerBase

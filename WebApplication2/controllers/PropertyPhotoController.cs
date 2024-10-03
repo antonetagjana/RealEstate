@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication2.Data; 
+using WebApplication2.Data;
+using WebApplication2.DTOs;
 using WebApplication2.models;
 using WebApplication2.Services.PropertyPhoto;
 
@@ -26,8 +27,14 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePropertyPhoto(PropertyPhoto propertyPhoto)
+        public async Task<IActionResult> CreatePropertyPhoto(PropertyPhotoCreateDTO  propertyPhotoCreateDTO)
         {
+            var propertyPhoto = new PropertyPhoto()
+            {
+                PhotoUrl= propertyPhotoCreateDTO.PhotoUrl,
+                PropertyId = propertyPhotoCreateDTO.PropertyId,
+                
+            };
             await propertyPhotoService.AddAsync(propertyPhoto);
             return CreatedAtAction(nameof(GetPropertyPhotoById), new { id = propertyPhoto.PhotoId }, propertyPhoto);
         }

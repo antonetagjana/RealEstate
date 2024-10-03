@@ -9,4 +9,8 @@ public interface IPropertyRepository
     Task AddAsync(Prona property);
     Task UpdateAsync(Prona property);
     Task DeleteAsync(Guid propertyId);
+    Task saveChanges();
+    Task<IEnumerable<Prona>> GetPropertiesBySellerIdAsync(Guid sellerId);
+    
+  
 }

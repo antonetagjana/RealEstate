@@ -9,4 +9,5 @@ public interface IUserRepository
     Task AddAsync(models.User user);
     Task UpdateAsync(models.User user);
     Task DeleteAsync(Guid userId);
+    Task saveChangesAsync();
 }

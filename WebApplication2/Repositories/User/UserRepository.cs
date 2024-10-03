@@ -13,6 +13,10 @@ public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
             .Include(u => u.Notifications)
             .FirstOrDefaultAsync(u => u.UserId == userId);
     }
+    public async Task saveChangesAsync()
+    {
+        await dbContext.SaveChangesAsync();
+    }
 
     public async Task<IEnumerable<models.User>> GetAllAsync()
     {
@@ -40,4 +44,6 @@ public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
             await dbContext.SaveChangesAsync();
         }
     }
+
+   
 }

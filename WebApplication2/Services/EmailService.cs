@@ -2,7 +2,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
-/*
+
 public class EmailService
 {
     private readonly IConfiguration _configuration;
@@ -21,4 +21,4 @@ public class EmailService
         var msg = MailHelper.CreateSingleEmail(from, to, subject, message, message);
         var response = await client.SendEmailAsync(msg);
     }
-}*/
+}

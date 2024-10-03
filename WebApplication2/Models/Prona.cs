@@ -1,5 +1,6 @@
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication2.models;
 
@@ -7,7 +8,8 @@ namespace WebApplication2.models;
 public class Prona
 {
     public Guid PropertyId { get; set; }
-    public Guid UserId { get; set; } 
+    [ForeignKey("User")]
+    
     [MaxLength (255)]
     public string Title { get; set; } = string.Empty;
     [MaxLength (255)]
@@ -24,7 +26,12 @@ public class Prona
     public DateTime CreatedDate { get; set; } = DateTime.Now;
 
     
-    public User User { get; set; } 
-    public ICollection<PropertyPhoto> Photos { get; set; } = new List<PropertyPhoto>();
+    public User user { get; set; } 
+    public Guid UserId { get; set; } 
+    
+    
+    public List<PropertyPhoto> Photos { get; set; } = new List<PropertyPhoto>();
     public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+    
+    
 }

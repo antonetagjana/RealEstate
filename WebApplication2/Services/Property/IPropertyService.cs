@@ -1,11 +1,17 @@
-namespace WebApplication2.Services.Property;
-using models;
+using WebApplication2.DTOs;
+using WebApplication2.models;
+using WebApplication2.models;
 
-public interface IPropertyService
+namespace WebApplication2.Services.Property
 {
-    Task<Prona?> GetByIdAsync(Guid propertyId);
-    Task<IEnumerable<Prona>> GetAllAsync();
-    Task AddAsync(Prona property);
-    Task UpdateAsync(Prona property);
-    Task DeleteAsync(Guid propertyId);
+    public interface IPropertyService
+    {
+        Task<Prona?> GetByIdAsync(Guid propertyId);
+        Task<IEnumerable<Prona>> GetAllAsync();
+        Task AddPropertyAsync(PropertyCreateDTO propertyCreateDto);
+        Task AddPropertyAsync(Prona property);
+        Task UpdateAsync(Prona property);
+        Task DeleteAsync(Guid propertyId);
+        Task<IEnumerable<Prona>> GetPropertiesBySellerIdAsync(Guid sellerId);
+    }
 }

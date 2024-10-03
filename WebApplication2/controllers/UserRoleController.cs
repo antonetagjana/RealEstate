@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.models;
 using WebApplication2.Services.UserRoles;
 
 namespace WebApplication2.controllers;
 
+[Authorize(Policy = "AdminPolicy")]
 [ApiController]
 [Route("api/[controller]")]
 public class UserRoleController(IUserRolesService userRoleService) : ControllerBase

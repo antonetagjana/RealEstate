@@ -133,28 +133,27 @@ namespace WebApplication2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BuyerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("CheckIn")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("CheckOut")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("PropertyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
+                    b.Property<int>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ReservationId");
 
-                    b.HasIndex("BuyerId");
-
                     b.HasIndex("PropertyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -194,7 +193,7 @@ namespace WebApplication2.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -209,6 +208,9 @@ namespace WebApplication2.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -241,13 +243,13 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.models.Prona", b =>
                 {
-                    b.HasOne("WebApplication2.models.User", "User")
+                    b.HasOne("WebApplication2.models.User", "user")
                         .WithMany("Properties")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("WebApplication2.models.PropertyPhoto", b =>
@@ -263,21 +265,21 @@ namespace WebApplication2.Migrations
 
             modelBuilder.Entity("WebApplication2.models.Reservation", b =>
                 {
-                    b.HasOne("WebApplication2.models.User", "Buyer")
-                        .WithMany("Reservations")
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("WebApplication2.models.Prona", "Property")
                         .WithMany("Reservations")
                         .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Buyer");
+                    b.HasOne("WebApplication2.models.User", "User")
+                        .WithMany("Reservations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Property");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebApplication2.models.UserRole", b =>
