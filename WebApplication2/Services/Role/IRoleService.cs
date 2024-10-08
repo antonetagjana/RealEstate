@@ -11,4 +11,6 @@ public interface IRoleService
     Task UpdateRoleAsync(Guid roleId, RoleUpdateDTO roleUpdateDto);
     Task DeleteRoleAsync(Guid roleId);
     Task<Role?> FindRoleByEmailAsync(string email);
+    Task<Role?> FindRoleByRoleNameAsync(string roleName);
+
 }

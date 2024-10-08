@@ -58,4 +58,11 @@ public class RoleService : IRoleService
 
         return user.UserRoles.Select(ur => ur.Role).FirstOrDefault(); // Kthen rolin e parë të përdoruesit
     }
+    public async Task<Role?> FindRoleByRoleNameAsync(string roleName)
+    {
+        return await _dbContext.Roles
+            .FirstOrDefaultAsync(r => r.RoleName.Equals(roleName, StringComparison.OrdinalIgnoreCase));
+    }
+
+    
 }

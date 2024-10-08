@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using WebApplication2.DTOs;
 using WebApplication2.Services;
+using BCrypt.Net;
+
 
 
 namespace WebApplication2.controllers;
@@ -56,6 +58,32 @@ public class AuthController: ControllerBase
             return Unauthorized("Invalid credintials");
         }
         
+        // Kontrollo nëse përdoruesi është i bllokuar
+
+        if (user.LockoutEndTime.HasValue && user.LockoutEndTime > DateTime.UtcNow)
+        {
+            return Unauthorized("Account is locked. Please try again later.");
+        }
+        
+        // Verifikimi i fjalëkalimit duke përdorur BCrypt
+        bool isValidPassword = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password);
+        if (!isValidPassword)
+        {
+            // Përditëso tentativat e dështuara
+            user.FailedLoginAttempts++;
+            if (user.FailedLoginAttempts >= 5)
+            {
+                user.LockoutEndTime = DateTime.UtcNow.AddMinutes(10); // Blloko për 10 minuta
+            }
+            await _userService.UpdateUserAsync(user); // Ruaj ndryshimet në databazë
+            return Unauthorized("Invalid credentials");
+        }
+        // Nëse login-i është i suksesshëm, rivendos tentativat e dështuara
+        user.FailedLoginAttempts = 0;
+        user.LockoutEndTime = null;
+        await _userService.UpdateUserAsync(user);
+        
+        
         var token = _jwtTokenService.GenerateToken(user);
         
         return Ok(new{Token=token});
@@ -64,7 +92,8 @@ public class AuthController: ControllerBase
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync();
-        return RedirectToAction("Login","Auth");
+        return Ok("Logout successful");
+        // return RedirectToAction("Login","Auth");
     }
 
     public class LoginDto
@@ -72,5 +101,8 @@ public class AuthController: ControllerBase
         public string Email { get; set; }
         public string Password { get; set; }
     }
+    
+
+
 
 }

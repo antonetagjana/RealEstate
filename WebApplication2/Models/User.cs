@@ -10,7 +10,7 @@ public class User
    [Required,EmailAddress] 
    public string Email { get; set; } = string.Empty;
     [MaxLength(50)]
-    public string PasswordHash { get; set; } = string.Empty; 
+    public string Password { get; set; } = string.Empty; 
    [MaxLength(50)]
     public string Role { get; set; } = "Buyer"; 
    [MaxLength(50)]
@@ -22,4 +22,8 @@ public class User
     public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
     
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    
+    public int FailedLoginAttempts { get; set; } = 0; // Tentativat e dështuara
+    public DateTime? LockoutEndTime { get; set; }  // Koha deri kur është i bllokuar
+
 }

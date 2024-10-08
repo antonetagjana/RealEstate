@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Lamar;
 using Lamar.Microsoft.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using WebApplication2.Middleware;
 using WebApplication2.Registers;
@@ -20,6 +21,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseLamar((context, registry) =>
 {
     registry.IncludeRegistry<WebApplication2.Registers.ServiceRegistry>();
+});
+
+// Shtimi i HttpClient me emër specifik për përdorim në klasa të tjera
+builder.Services.AddHttpClient("RealEstateAPI", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:5001/api/"); // Vendos adresën bazë të API-së që do të përdorësh
+    client.Timeout = TimeSpan.FromSeconds(30); // Opsionale: Përcakton kohën maksimale që klienti do të presë për përgjigje
 });
 
 
@@ -60,6 +68,12 @@ builder.Services.AddAuthorization(options =>
     
     options.AddPolicy("AuthenticatedUserPolicy", policy =>
         policy.RequireAuthenticatedUser());
+    
+    
+        options.AddPolicy("HRManagerOnly", policy =>
+            policy.RequireClaim("Role", "HRManager"));
+ 
+
 });
 
 
@@ -68,6 +82,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
     ServiceLifetime.Scoped);
+
 
 var app = builder.Build();
 

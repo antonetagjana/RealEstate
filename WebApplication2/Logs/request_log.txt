@@ -1,0 +1,574 @@
+Kerkesa GET/index.html ne 10/2/2024 1:35:53 AM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/index.js ne 10/2/2024 1:35:53 AM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/2/2024 1:35:53 AM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa POST/api/Auth/login ne 10/2/2024 1:37:22 AM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Content-Type : application/json
+Origin : http://localhost:5000
+Referer : http://localhost:5000/index.html
+Content-Length : 55
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa GET/index.html ne 10/2/2024 11:31:50 AM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/index.js ne 10/2/2024 11:31:51 AM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/2/2024 11:31:51 AM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa POST/api/Auth/login ne 10/2/2024 11:35:21 AM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Content-Type : application/json
+Origin : http://localhost:5000
+Referer : http://localhost:5000/index.html
+Content-Length : 51
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa GET/index.html ne 10/2/2024 1:30:49 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/index.js ne 10/2/2024 1:30:49 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/2/2024 1:30:49 PM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa GET/index.html ne 10/3/2024 7:47:06 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Upgrade-Insecure-Requests : 1
+Sec-Fetch-Site : none
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Kerkesa GET/index.js ne 10/3/2024 7:47:06 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger-ui.css ne 10/3/2024 7:47:06 PM
+Accept : text/css,*/*;q=0.1
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267d0e8e2"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : style
+Kerkesa GET/swagger-ui-bundle.js ne 10/3/2024 7:47:06 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267c493d1"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/favicon-32x32.png ne 10/3/2024 7:47:06 PM
+Accept : image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267d2bb74"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : image
+Kerkesa GET/index.html ne 10/3/2024 7:47:24 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : none
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/index.css ne 10/3/2024 7:47:24 PM
+Accept : text/css,*/*;q=0.1
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : style
+Kerkesa GET/swagger-ui-standalone-preset.js ne 10/3/2024 7:47:24 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/index.js ne 10/3/2024 7:47:24 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/3/2024 7:47:25 PM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa GET/index.html ne 10/5/2024 11:07:28 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/index.js ne 10/5/2024 11:07:28 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/5/2024 11:07:29 PM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa POST/api/Auth/login ne 10/5/2024 11:07:56 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Content-Type : application/json
+Origin : http://localhost:5000
+Referer : http://localhost:5000/index.html
+Content-Length : 44
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa GET/index.html ne 10/7/2024 3:26:43 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Upgrade-Insecure-Requests : 1
+Sec-Fetch-Site : none
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Kerkesa GET/index.js ne 10/7/2024 3:26:43 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/7/2024 3:26:44 PM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa GET/index.html ne 10/7/2024 6:03:03 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : none
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/swagger-ui.css ne 10/7/2024 6:03:03 PM
+Accept : text/css,*/*;q=0.1
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267d0e8e2"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : style
+Kerkesa GET/index.css ne 10/7/2024 6:03:03 PM
+Accept : text/css,*/*;q=0.1
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267d2b9ca"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : style
+Kerkesa GET/swagger-ui-bundle.js ne 10/7/2024 6:03:03 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267c493d1"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/favicon-32x32.png ne 10/7/2024 6:03:03 PM
+Accept : image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+If-Modified-Since : Mon, 26 Aug 2024 08:31:54 GMT
+If-None-Match : "1daf79267d2bb74"
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : image
+Kerkesa GET/index.html ne 10/7/2024 6:05:00 PM
+Accept : text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Cache-Control : max-age=0
+Upgrade-Insecure-Requests : 1
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+sec-ch-ua-platform : "Windows"
+Sec-Fetch-Site : none
+Sec-Fetch-Mode : navigate
+Sec-Fetch-User : ?1
+Sec-Fetch-Dest : document
+Kerkesa GET/swagger-ui-standalone-preset.js ne 10/7/2024 6:05:00 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/index.js ne 10/7/2024 6:05:00 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : no-cors
+Sec-Fetch-Dest : script
+Kerkesa GET/swagger/v1/swagger.json ne 10/7/2024 6:05:01 PM
+Accept : application/json,*/*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Referer : http://localhost:5000/index.html
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty
+Kerkesa POST/api/User ne 10/7/2024 6:06:23 PM
+Accept : */*
+Connection : keep-alive
+Host : localhost:5000
+User-Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
+Accept-Encoding : gzip, deflate, br, zstd
+Accept-Language : en-US,en;q=0.9
+Content-Type : application/json
+Origin : http://localhost:5000
+Referer : http://localhost:5000/index.html
+Content-Length : 173
+sec-ch-ua-platform : "Windows"
+sec-ch-ua : "Microsoft Edge";v="129", "Not=A?Brand";v="8", "Chromium";v="129"
+sec-ch-ua-mobile : ?0
+Sec-Fetch-Site : same-origin
+Sec-Fetch-Mode : cors
+Sec-Fetch-Dest : empty

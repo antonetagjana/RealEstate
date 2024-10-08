@@ -21,4 +21,14 @@ public class EmailService
         var msg = MailHelper.CreateSingleEmail(from, to, subject, message, message);
         var response = await client.SendEmailAsync(msg);
     }
+
+    public async Task SendConfirmationEmailAsync(string toEmail, string userId, string token)
+    {
+        var confirmationLink =
+            $"http://localhost:5000/index.html/Account/ConfirmEmail?userId={userId}&token={Uri.EscapeDataString(token)}";
+        var subject = "Confirm your email";
+        var message = $"Please confirm your email by clicking on the following link: <a href='{confirmationLink}'>Confirm Email</a>";
+            
+        await SendEmailAsync(toEmail, subject, message);
+    }
 }
