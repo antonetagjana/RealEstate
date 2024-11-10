@@ -1,0 +1,32 @@
+.dashboard-container {
+    text-align: center;
+  }
+  
+  .statistics {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .stat-box {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    width: 150px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

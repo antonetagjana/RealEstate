@@ -1,0 +1,25 @@
+
+<div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+    <div class="statistics">
+      <div class="stat-box">
+        <h3>Përdoruesit</h3>
+        <p>{{ usersCount }}</p>
+      </div>
+      <div class="stat-box">
+        <h3>Prona</h3>
+        <p>{{ propertiesCount }}</p>
+      </div>
+      <div class="stat-box">
+        <h3>Rezervime</h3>
+        <p>{{ reservationsCount }}</p>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button routerLink="/admin/user-management">Menaxho Përdoruesit</button>
+      <button routerLink="/admin/property-management">Menaxho Pronat</button>
+      <button routerLink="/admin/reservation-management">Menaxho Rezervimet</button>
+    </div>
+  </div>
+  

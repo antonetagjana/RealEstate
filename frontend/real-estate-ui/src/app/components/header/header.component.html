@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="container">
+    <a routerLink="/" class="logo">
+      <span class="logo-icon">⭐</span>
+      DreamHome
+    </a>
+    <nav class="nav">
+      <a routerLink="/search" class="nav-link">Search</a>
+      <a routerLink="/favorites" class="nav-link">Favorites</a>
+      <button class="nav-link" (click)="toggleProfileMenu()">Profile</button>
+
+     <!-- Modal për Login dhe Register -->
+     <div class="modal" *ngIf="showProfileMenu">
+      <div class="modal-content">
+        <button class="close" (click)="toggleProfileMenu()">X</button>
+        <app-login *ngIf="showLogin"></app-login>
+        <app-registration *ngIf="!showLogin"></app-registration>
+        <button *ngIf="showLogin" (click)="toggleForm()">Don't have an account? Register</button>
+        <button *ngIf="!showLogin" (click)="toggleForm()">Already have an account? Login</button>
+      </div>
+    </div>
+    </nav>
+  </div>
+</header>

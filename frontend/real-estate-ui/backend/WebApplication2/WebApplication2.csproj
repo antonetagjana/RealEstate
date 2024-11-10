@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Lamar.Microsoft.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+        <PackageReference Include="SendGrid" Version="9.29.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Migrations\20240916220320_CreateOtherTables.cs">
+        <DependentUpon>20240916223207_UpdateDeleteBehavior.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Migrations\20240916221009_CreateUserTable.cs">
+        <DependentUpon>20240916223207_UpdateDeleteBehavior.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="TestProject\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="TestProject\appsettings.json" />
+      <_ContentIncludedByDefault Remove="TestProject\bin\Debug\net8.0\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="TestProject\bin\Debug\net8.0\appsettings.json" />
+      <_ContentIncludedByDefault Remove="TestProject\bin\Debug\net8.0\TestProject.deps.json" />
+      <_ContentIncludedByDefault Remove="TestProject\bin\Debug\net8.0\TestProject.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="TestProject\obj\Debug\net8.0\staticwebassets.build.json" />
+      <_ContentIncludedByDefault Remove="TestProject\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="TestProject\obj\TestProject.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="TestProject\Properties\launchSettings.json" />
+    </ItemGroup>
+
+</Project>

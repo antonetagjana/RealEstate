@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="search-container">
+  <div class="search-filters">
+    <h2>Filters</h2>
+    <form (ngSubmit)="applyFilters()">
+      <div class="filter-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" [(ngModel)]="filters.location" name="location" placeholder="City, State, or ZIP">
+      </div>
+      <div class="filter-group">
+        <label for="propertyType">Property Type</label>
+        <select id="propertyType" [(ngModel)]="filters.propertyType" name="propertyType">
+          <option value="">All Types</option>
+          <option value="house">House</option>
+          <option value="apartment">Apartment</option>
+          <option value="condo">Condo</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="minPrice">Min Price</label>
+        <input type="number" id="minPrice" [(ngModel)]="filters.minPrice" name="minPrice" placeholder="Min Price">
+      </div>
+      <div class="filter-group">
+        <label for="maxPrice">Max Price</label>
+        <input type="number" id="maxPrice" [(ngModel)]="filters.maxPrice" name="maxPrice" placeholder="Max Price">
+      </div>
+      <div class="filter-group">
+        <label for="bedrooms">Bedrooms</label>
+        <select id="bedrooms" [(ngModel)]="filters.bedrooms" name="bedrooms">
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+          <option value="4">4+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="bathrooms">Bathrooms</label>
+        <select id="bathrooms" [(ngModel)]="filters.bathrooms" name="bathrooms">
+          <option value="">Any</option>
+          <option value="1">1+</option>
+          <option value="2">2+</option>
+          <option value="3">3+</option>
+        </select>
+      </div>
+      <button type="submit" class="apply-filters-btn">Apply Filters</button>
+    </form>
+  </div>
+  <div class="search-results">
+    <h2>Search Results</h2>
+    <div class="results-count">{{ properties.length }} properties found</div>
+    <div *ngIf="isLoading">Loading properties...</div>
+    <div *ngIf="!isLoading"class="property-list">
+      <div class="property-card" *ngFor="let property of properties">
+        <img [src]="property.image" [alt]="property.title" class="property-image">
+        <div class="property-details">
+          <h3 class="property-title">{{ property.title }}</h3>
+          <p class="property-location">{{ property.location }}</p>
+          <p class="property-price">{{ property.price | currency:'USD':'symbol':'1.0-0' }}</p>
+          <div class="property-features">
+            <span class="feature"><i class="fas fa-bed"></i> {{ property.bedrooms }} beds</span>
+            <span class="feature"><i class="fas fa-bath"></i> {{ property.bathrooms }} baths</span>
+            <span class="feature"><i class="fas fa-ruler-combined"></i> {{ property.area }} sqft</span>
+          </div>
+          <button class="view-details-btn" (click)="viewDetails(property.id)">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
