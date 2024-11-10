@@ -1,0 +1,27 @@
+<div class="dashboard-container">
+    <h1>Seller Dashboard</h1>
+    <p>Mirë se vini, {{ sellerName }}!</p>
+  
+    <div class="statistics">
+      <div class="stat-box">
+        <h3>Prona të listuara</h3>
+        <p>{{ listedPropertiesCount }}</p>
+      </div>
+      <div class="stat-box">
+        <h3>Rezervime të konfirmuara</h3>
+        <p>{{ confirmedReservationsCount }}</p>
+      </div>
+    </div>
+  
+    <div class="actions">
+      <button routerLink="/seller/property-management">Menaxho Pronat</button>
+      <button routerLink="/seller/reservation-management">Shiko Rezervimet</button>
+      <button routerLink="/seller/property-add">Shto Pronë të Re</button>
+      <button  (click)="toggleForm()">Shto Prone</button>
+    </div>
+
+    <!-- Forma për të shtuar një pronë të re që shfaqet kur `showForm` është true -->
+  <app-property-management *ngIf="showForm"></app-property-management>
+
+  </div>
+  

@@ -1,0 +1,34 @@
+<form (ngSubmit)="addProperty()" enctype="multipart/form-data">
+  <div>
+    <label for="title">Title:</label>
+    <input type="text" id="title" [(ngModel)]="newProperty.title" name="title" required>
+  </div>
+
+  <div>
+    <label for="location">Location:</label>
+    <input type="text" id="location" [(ngModel)]="newProperty.location" name="location" required>
+  </div>
+
+  <div>
+    <label for="price">Price:</label>
+    <input type="number" id="price" [(ngModel)]="newProperty.price" name="price" required>
+  </div>
+
+  <div>
+    <label for="surfaceArea">Surface Area:</label>
+    <input type="number" id="surfaceArea" [(ngModel)]="newProperty.surfaceArea" name="surfaceArea" required>
+  </div>
+
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" [(ngModel)]="newProperty.description" name="description" required></textarea>
+  </div>
+
+  <!-- File input for image -->
+  <div>
+    <label for="image">Image:</label>
+    <input type="file" id="image" (change)="onFileSelected($event)">
+  </div>
+
+  <button type="submit">Add Property</button>
+</form>

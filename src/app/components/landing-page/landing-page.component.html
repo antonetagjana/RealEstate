@@ -1,0 +1,82 @@
+<main class="landing-page">
+  <section class="hero">
+    <div class="container">
+      <h1>Discover dream properties across Europe and beyond</h1>
+      <div class="search-container">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Search by country, city, region, or ZIP code" class="search-input">
+        <button (click)="search()" class="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seksioni për Featured Properties -->
+  <section class="featured-properties">
+    <div class="container">
+      <h2>Featured Properties</h2>
+      
+      <!-- Kontrollo nëse po ngarkohen të dhënat -->
+      <div *ngIf="isLoading" class="loading-message">Loading properties...</div>
+
+      <!-- Kontrollo nëse nuk ka prona të disponueshme -->
+      <div *ngIf="!isLoading && featuredProperties.length === 0" class="no-properties-message">
+        No featured properties available at the moment.
+      </div>
+
+      <!-- Trego gridin e pronave vetëm nëse ka prona -->
+      <div *ngIf="!isLoading && featuredProperties.length > 0" class="property-grid">
+        <div class="property-card" *ngFor="let property of featuredProperties">
+          <img [src]="property.image" [alt]="property.title" class="property-image">
+          <div class="property-details">
+            <h3>{{ property.title }}</h3>
+            <p class="location">{{ property.location }}</p>
+            <p class="price">{{ property.price | currency:'USD':'symbol':'1.0-0' }}</p>
+            <div class="features">
+              <span><i class="fas fa-bed"></i> {{ property.bedrooms }} beds</span>
+              <span><i class="fas fa-bath"></i> {{ property.bathrooms }} baths</span>
+              <span><i class="fas fa-ruler-combined"></i> {{ property.area }} sqft</span>
+            </div>
+            <button (click)="viewDetails(property.id)" class="view-details-btn">View Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Find Your Dream Home Today</h2>
+      <p>Join thousands of satisfied homeowners who found their perfect property with us.</p>
+      <button (click)="startSearch()" class="cta-button">Start Your Search</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>We're dedicated to helping you find the perfect property across Europe and beyond.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Search</a></li>
+          <li><a href="#">Featured Properties</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: info&#64;properstar.com</p>
+        <p>Phone: +1 (123) 456-7890</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Properstar. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

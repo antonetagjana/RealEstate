@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="favorites-container">
+  <h1 class="favorites-title">Your Favorite Properties</h1>
+  <div class="favorites-list" *ngIf="favorites.length > 0; else noFavorites">
+    <div class="property-card" *ngFor="let property of favorites">
+      <img [src]="property.image" [alt]="property.title" class="property-image">
+      <div class="property-details">
+        <h2 class="property-title">{{ property.title }}</h2>
+        <p class="property-location">{{ property.location }}</p>
+        <p class="property-price">{{ property.price | currency:'USD':'symbol':'1.0-0' }}</p>
+        <div class="property-features">
+          <span class="feature"><i class="fas fa-bed"></i> {{ property.bedrooms }} beds</span>
+          <span class="feature"><i class="fas fa-bath"></i> {{ property.bathrooms }} baths</span>
+          <span class="feature"><i class="fas fa-ruler-combined"></i> {{ property.area }} sqft</span>
+        </div>
+        <button class="view-details-btn" (click)="viewDetails(property.id)">View Details</button>
+        <button class="remove-favorite-btn" (click)="removeFavorite(property.id)">Remove from Favorites</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noFavorites>
+    <p class="no-favorites-message">You haven't added any properties to your favorites yet.</p>
+  </ng-template>
+</div>

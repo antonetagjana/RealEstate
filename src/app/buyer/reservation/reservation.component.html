@@ -1,0 +1,26 @@
+<div class="reservation-container">
+    <h2>Reservations for Property {{ propertyId }}</h2>
+  <!--mesazhi i ngarkimit--> 
+    <div *ngIf="isLoading">Loading reservations...</div>
+
+
+    <form *ngIf = "!isLoading" (ngSubmit)="createReservation()">
+      <label for="date">Date:</label>
+      <input type="date" [(ngModel)]="newReservation.date" name="date" required>
+  
+      <label for="guests">Guests:</label>
+      <input type="number" [(ngModel)]="newReservation.guests" name="guests" required>
+  
+      <button type="submit">Create Reservation</button>
+    </form>
+
+  <!--lista e rezervimeve ekzistuese -->
+  <h3 *ngIf="!isLoading && reservations.length > 0">Existing Reservations</h3>
+  <p *ngIf="!isLoading && reservations.length === 0">No reservations found.</p>
+  <ul *ngIf="!isLoading && reservations.length > 0">
+      <li *ngFor="let reservation of reservations">
+        {{ reservation.date }} - {{ reservation.guests }} guests
+      </li>
+    </ul>
+  </div>
+  

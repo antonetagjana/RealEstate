@@ -1,0 +1,34 @@
+<div class="property-list">
+  <h1>Available Properties</h1>
+
+  <!--mesazhi i ngarkimit -->
+  <div *ngIf="isLoading">Loading properties...</div>
+
+  <!--lista e pronave-->
+  <div *ngFor="let property of getPagedProperties()" class="property-card">
+    <img *ngIf="property.photos?.length > 0; else noImage" [src]="property.photos[0].photoUrl" alt="{{ property.title }}" class="property-image" />
+    
+    <!-- fallback nëse nuk ka imazh -->
+    <ng-template #noImage>
+      <img src="/assets/default-image.jpg" alt="No Image Available" class="property-image" />
+    </ng-template>
+
+    <h2>{{ property.title }}</h2>
+    <p>{{ property.location }}</p>
+    <p>{{ property.price | currency }}</p>
+    <p>{{ property.surfaceArea }} sqft</p>
+    <button (click)="viewDetails(property.id)">View Details</button>
+  </div>
+
+  <!--shfaqet nese nuk ka prona te disponueshme -->
+  <ng-template #noProperties>
+    <p>No properties found.</p>
+  </ng-template>
+
+  <!-- Paginimi për lëvizjen ndërmjet faqeve -->
+  <div class="pagination" *ngIf="!isLoading && properties.length > pageSize">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="nextPage()" [disabled]="(currentPage * pageSize) >= properties.length">Next</button>
+  </div>
+</div>
