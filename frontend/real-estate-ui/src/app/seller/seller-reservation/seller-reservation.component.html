@@ -1,0 +1,42 @@
+<!-- <div class="reservations-container">
+    <header class="page-header">
+      <h1>Rezervimet</h1>
+      <div class="header-actions">
+        <button class="btn btn-primary" routerLink="/seller/dashboard">
+          <i class="fas fa-arrow-left"></i> Kthehu në Dashboard
+        </button>
+      </div>
+    </header>
+  
+    <div class="loading-spinner" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+  
+    <div class="reservations-grid" *ngIf="!loading">
+      <div class="reservation-card" *ngFor="let reservation of reservations">
+        <div class="card-header">
+          <span class="property-name">{{ reservation.property.name }}</span>
+          <span [class]="'status-badge ' + getStatusClass(reservation.status)">
+            {{ reservation.status }}
+          </span>
+        </div>
+        
+        <div class="card-body">
+          <div class="info-row">
+            <i class="fas fa-user"></i>
+            <span>{{ reservation.user.firstName }} {{ reservation.user.lastName }}</span>
+          </div>
+          
+          <div class="info-row">
+            <i class="fas fa-calendar-check"></i>
+            <span>Check-in: {{ reservation.checkIn | date:'short' }}</span>
+          </div>
+          
+          <div class="info-row">
+            <i class="fas fa-calendar-times"></i>
+            <span>Check-out: {{ reservation.checkOut | date:'short' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

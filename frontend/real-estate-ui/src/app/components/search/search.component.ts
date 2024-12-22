@@ -27,8 +27,8 @@ interface SearchFilters {
 
 @Component({
   selector: 'app-search',
-  standalone:true,
-  imports:[FormsModule,CommonModule,HeaderComponent],
+  standalone: true,
+  imports: [FormsModule, CommonModule, HeaderComponent],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
@@ -44,11 +44,12 @@ export class SearchComponent implements OnInit {
   };
    
   isLoading = true;
-  constructor(private router: Router,private propertyService: PropertyService) { }
+  constructor(private router: Router, private propertyService: PropertyService) { }
 
   ngOnInit(): void {
     this.loadProperties();
   }
+
   loadProperties(): void {
     this.isLoading = true;
     this.propertyService.getAllProperties().subscribe({

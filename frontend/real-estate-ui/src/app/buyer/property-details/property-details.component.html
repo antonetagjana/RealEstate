@@ -18,9 +18,17 @@
         <p><strong>Price:</strong> {{ property.price | currency }}</p>
         <p><strong>Surface Area:</strong> {{ property.surfaceArea }} sqft</p>
         <p><strong>Description:</strong> {{ property.description }}</p>
-        <!-- Shto më shumë fusha sipas nevojës -->
-      </div>
+       <!-- Reserve Button, only visible if the form is closed -->
+  <button *ngIf="!showReservationForm" (click)="openReservationForm()">Reserve</button>
+
+<!-- Reservation Component -->
+<app-reservation *ngIf="showReservationForm" 
+                 [propertyId]="selectedPropertyId" 
+                 [userId]="loggedInUserId"
+                 (reservationComplete)="handleReservationComplete($event)">
+</app-reservation>
     </div>
+  </div>
   </div>
 
   <div *ngIf="!property">

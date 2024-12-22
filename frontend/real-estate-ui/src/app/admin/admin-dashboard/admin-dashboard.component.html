@@ -1,25 +1,32 @@
-
 <div class="dashboard-container">
+  <header class="dashboard-header">
     <h1>Admin Dashboard</h1>
-    <div class="statistics">
-      <div class="stat-box">
-        <h3>Përdoruesit</h3>
-        <p>{{ usersCount }}</p>
-      </div>
-      <div class="stat-box">
-        <h3>Prona</h3>
-        <p>{{ propertiesCount }}</p>
-      </div>
-      <div class="stat-box">
-        <h3>Rezervime</h3>
-        <p>{{ reservationsCount }}</p>
-      </div>
+    <button (click)="logout()" class="logout-button">Logout</button>
+  </header>
+
+  <section class="welcome-section">
+    <h2>Mirë se vini, Administrator!</h2>
+    <p>Menaxhoni përdoruesit, pronat dhe rezervimet në mënyrë efektive.</p>
+  </section>
+
+  <section class="stats-container">
+    <div class="stat-card">
+      <h3>Përdoruesit Totale</h3>
+      <p>{{usersCount}}</p>
     </div>
-    
-    <div class="actions">
-      <button routerLink="/admin/user-management">Menaxho Përdoruesit</button>
-      <button routerLink="/admin/property-management">Menaxho Pronat</button>
-      <button routerLink="/admin/reservation-management">Menaxho Rezervimet</button>
+    <div class="stat-card">
+      <h3>Pronat Totale</h3>
+      <p>{{propertiesCount}}</p>
     </div>
-  </div>
-  
+    <div class="stat-card">
+      <h3>Rezervime Totale</h3>
+      <p>{{reservationsCount}}</p>
+    </div>
+  </section>
+
+  <section class="actions-container">
+    <button class="action-button" routerLink="/manage/users" >Menaxho Përdoruesit</button>
+    <button class="action-button" routerLink="/admin/property">Menaxho Pronat</button>
+    <button class="action-button" routerLink="/admin/reservations">Menaxho Rezervimet</button>
+  </section>
+</div>

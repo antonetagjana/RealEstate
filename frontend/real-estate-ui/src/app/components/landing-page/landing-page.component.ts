@@ -20,17 +20,17 @@ interface Property {
 
 @Component({
   selector: 'app-landing-page',
-  standalone:true,
-  imports:[HeaderComponent,FormsModule,CommonModule],
+  standalone: true,
+  imports: [HeaderComponent, FormsModule, CommonModule],
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
   searchTerm: string = '';
   featuredProperties: Property[] = [];
-  isLoading:boolean =false;
+  isLoading: boolean = false;
 
-  constructor(private router: Router,private propertyService: PropertyService) { }
+  constructor(private router: Router, private propertyService: PropertyService) { }
 
   ngOnInit(): void {
     this.loadFeaturedProperties();
@@ -71,19 +71,55 @@ export class LandingPageComponent implements OnInit {
       }
     });
   }
-  
 
   search(): void {
+    if (!this.searchTerm.trim()) {
+      console.log("load features properties")
+      // If no search term is provided, load all properties
+      this.loadFeaturedProperties();
+      return;
+    }
+  
     console.log('Searching for:', this.searchTerm);
-    // Navigate to search results page with the search term
-    this.router.navigate(['/search'], { queryParams: { q: this.searchTerm } });
+  
+    // Fetch properties by location
+    this.propertyService.getPropertiesByLocation(this.searchTerm).subscribe({
+      next: (filteredProperties: any) => {
+        console.log("properties", filteredProperties)
+        if (Array.isArray(filteredProperties)) {
+          this.featuredProperties = filteredProperties.map((prop: any) => ({
+            id: prop.propertyId,
+            title: prop.title,
+            location: prop.location,
+            price: prop.price,
+            bedrooms: prop.bedrooms || 0,
+            bathrooms: prop.bathrooms || 0,
+            area: prop.surfaceArea || 0,
+            image: prop.photos && prop.photos.length > 0
+              ? `http://localhost:5000${prop.photos[0].photoUrl}`
+              : 'assets/default.jpg',
+          }));
+        } else {
+          console.log("test");
+          this.featuredProperties = [];
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching properties:', err);
+        this.featuredProperties = [];
+      },
+    });
   }
-
+  
   viewDetails(propertyId: number): void {
     this.router.navigate(['/property', propertyId]);
   }
 
   startSearch(): void {
     this.router.navigate(['/search']);
+  }
+
+  goToProperties(): void {
+    this.router.navigate(['/properties']);
   }
 }

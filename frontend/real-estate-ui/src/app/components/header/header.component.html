@@ -5,20 +5,23 @@
       DreamHome
     </a>
     <nav class="nav">
+      <!-- Links për kërkim dhe favorites -->
       <a routerLink="/search" class="nav-link">Search</a>
       <a routerLink="/favorites" class="nav-link">Favorites</a>
-      <button class="nav-link" (click)="toggleProfileMenu()">Profile</button>
 
-     <!-- Modal për Login dhe Register -->
-     <div class="modal" *ngIf="showProfileMenu">
-      <div class="modal-content">
-        <button class="close" (click)="toggleProfileMenu()">X</button>
-        <app-login *ngIf="showLogin"></app-login>
-        <app-registration *ngIf="!showLogin"></app-registration>
-        <button *ngIf="showLogin" (click)="toggleForm()">Don't have an account? Register</button>
-        <button *ngIf="!showLogin" (click)="toggleForm()">Already have an account? Login</button>
+      <!-- Butoni Profile dhe Logout në varësi të statusit të logimit -->
+      <button  class="nav-link" (click)="toggleProfileMenu()">Profile</button>
+
+      <!-- Modal për Login dhe Register -->
+      <div class="modal" *ngIf="showProfileMenu">
+        <div class="modal-content">
+          <button class="close" (click)="toggleProfileMenu()">X</button>
+          <app-login *ngIf="showLogin" (close)="toggleProfileMenu()"></app-login>
+          <app-registration *ngIf="!showLogin" (close)="toggleProfileMenu()"></app-registration>
+          <button *ngIf="showLogin" (click)="toggleForm()">Don't have an account? Register</button>
+          <button *ngIf="!showLogin" (click)="toggleForm()">Already have an account? Login</button>
+        </div>
       </div>
-    </div>
     </nav>
   </div>
 </header>

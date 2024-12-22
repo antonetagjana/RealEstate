@@ -1,19 +1,27 @@
-<div class="dashboard">
-    <h1> teeeeeeeeeeeest</h1>
-    <h1>Mirë se vini, {{ userName }}!</h1> 
-     <div class="statistics">
-      <div class="stat-item">
-        <h3>Rezervimet tuaja</h3>
-        <p>{{ reservationsCount }}</p>
-      </div>
-      <div class="stat-item">
-        <h3>Prona të preferuara</h3>
-        <p>{{ favoritesCount }}</p>
-      </div>
-      <div class="stat-item">
-        <h3>Gjithsej prona</h3>
-        <p>{{ propertiesCount }}</p>
-      </div>
-    </div> 
-  </div>
-  
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Buyer Dashboard</h1>
+    <button (click)="logout()" class="logout-button">Logout</button>
+  </header>
+
+  <section class="welcome-section">
+    <h2>Mirë se vini, Emri i Blerësit!</h2>
+    <p>Kërkoni dhe menaxhoni rezervimet tuaja lehtësisht.</p>
+  </section>
+
+  <section class="stats-container">
+    <div class="stat-card">
+      <h3>Rezervime Aktive</h3>
+      <p>0</p>
+    </div>
+    <div class="stat-card">
+      <h3>Rezervime të Përfunduara</h3>
+      <p>0</p>
+    </div>
+  </section>
+
+  <section class="actions-container">
+    <button class="action-button">Shiko Pronat</button>
+    <button class="action-button">Rezervimet e Mia</button>
+  </section>
+</div>

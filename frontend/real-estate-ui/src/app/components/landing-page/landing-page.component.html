@@ -3,10 +3,21 @@
     <div class="container">
       <h1>Discover dream properties across Europe and beyond</h1>
       <div class="search-container">
-        <input type="text" [(ngModel)]="searchTerm" placeholder="Search by country, city, region, or ZIP code" class="search-input">
+        <!-- Input për kërkim -->
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          placeholder="Search by  location" 
+          class="search-input" 
+        />
+        
+        <!-- Butoni Search me ikonë -->
         <button (click)="search()" class="search-button">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search"></i> Search
         </button>
+
+        <!-- Butoni View Properties -->
+        <button class="btn btn-primary" (click)="goToProperties()">Apply Filters</button>
       </div>
     </div>
   </section>

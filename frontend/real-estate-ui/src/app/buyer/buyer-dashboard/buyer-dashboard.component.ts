@@ -3,11 +3,14 @@ import { ReservationService } from '../../services/reservationService/reservatio
 import { PropertyService } from '../../services/propertyService/property.service';
 import { FavoriteService } from '../../services/favoriteService/favorite.service';
 import { UserService } from '../../services/userService/user.service';
+import { HeaderComponent } from '../../components/header/header.component';
+import { AuthService } from '../../services/authService/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buyer-dashboard',
   templateUrl: './buyer-dashboard.component.html',
-  styleUrls: ['./buyer-dashboard.component.scss']
+  styleUrls: ['./buyer-dashboard.component.scss'],
 })
 export class BuyerDashboardComponent implements OnInit {
   reservationsCount: number = 0;
@@ -19,7 +22,9 @@ export class BuyerDashboardComponent implements OnInit {
     private reservationService: ReservationService,
     private propertyService: PropertyService,
     private favoriteService: FavoriteService,
-    private userService: UserService
+    private userService: UserService,
+    private authService:AuthService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +53,10 @@ export class BuyerDashboardComponent implements OnInit {
       (user) => this.userName = user.fullName,
       (error) => console.error('Gabim gjatë ngarkimit të profilit të përdoruesit', error)
     );
+  }
+
+  logout(): void{
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

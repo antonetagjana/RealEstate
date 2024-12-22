@@ -8,12 +8,22 @@ import { FavoriteService } from '../services/favoriteService/favorite.service';
 import { UserService } from '../services/userService/user.service';
 import { PropertyDetailComponent } from './property-details/property-details.component';
 import { PropertyListComponent } from './property-list/property-list.component';
+import { FormsModule } from '@angular/forms';
+import { ReservationComponent } from './reservation/reservation.component';
+import { PropertyFilterComponent } from './property-filter/property-filter.component';
 
 
 
 @NgModule({
-  declarations: [BuyerDashboardComponent,PropertyDetailComponent,PropertyListComponent],
+  declarations: [
+    BuyerDashboardComponent,
+    PropertyDetailComponent,
+    PropertyListComponent,
+    ReservationComponent,
+    PropertyFilterComponent
+  ],
   imports: [
+    FormsModule,
     CommonModule,
     BuyerRoutingModule
   ],
@@ -21,7 +31,8 @@ import { PropertyListComponent } from './property-list/property-list.component';
     ReservationService,
     PropertyService,
     FavoriteService,
-    UserService
+    UserService,
+    PropertyFilterComponent
   ]
 })
 export class BuyerModule { }

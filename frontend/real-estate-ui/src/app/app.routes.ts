@@ -6,18 +6,25 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 
 import { BuyerDashboardComponent } from './buyer/buyer-dashboard/buyer-dashboard.component';
 import { PropertyDetailComponent } from './buyer/property-details/property-details.component';
+import { SearchComponent } from './components/search/search.component';
+import { AdminReservationComponent } from './admin/admin-reservation/admin-reservation.component';
+import { AdminPropertyComponent } from './admin/admin-property/admin-property.component';
+import { ManageUsersComponent } from './admin/manage-users/manage-users.component';
 
 export const routes: Routes = [
   // Rrugë publike, e aksesueshme nga të gjithë
   { path: '', component: LandingPageComponent }, 
   { path: 'properties', component: PropertyListComponent }, 
   {path: 'property/:id',component: PropertyDetailComponent},
-  
+  {path:'search',component:SearchComponent},
+  {path: 'admin/reservations', component:AdminReservationComponent},
+  {path:'admin/property',component:AdminPropertyComponent},
+  {path:'manage/users',component:ManageUsersComponent},
   // Rruga `profile`, e aksesueshme nga të gjithë përdoruesit e autentikuar
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+  //  canActivate: [AuthGuard]
   },
   
   // Moduli `admin`, vetëm për përdoruesit me rolin `admin`

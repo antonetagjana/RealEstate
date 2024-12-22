@@ -1,0 +1,81 @@
+<div class="properties-container">
+    <header class="page-header">
+      <div class="header-content">
+        <h1>Properties <span class="count">({{ properties.length }})</span></h1>
+        <button class="btn-back" routerLink="/admin/dashboard">
+          <i class="fas fa-chevron-left"></i> Back
+        </button>
+      </div>
+    </header>
+  
+    <div class="loading-container" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+  
+    <div class="properties-grid" *ngIf="!loading">
+      <div class="property-card" *ngFor="let property of properties">
+        <div class="card-content">
+          <div class="status-section">
+            <div [class]="'status-indicator ' + getStatusClass(property.status)">
+              {{ property.status }}
+            </div>
+            <div class="property-date">
+              Last updated: {{ formatDate(property.updatedAt) }}
+            </div>
+          </div>
+  
+          <div class="property-image">
+            <img [src]="property.image" alt="{{ property.title }}" />
+          </div>
+  
+          <div class="property-main">
+            <div class="property-section">
+              <div class="property-info">
+                <h3>{{ property.title }}</h3>
+                <span class="property-id">ID: {{ property.id | slice: 0:8 }}</span>
+              </div>
+            </div>
+  
+            <div class="details-grid">
+              <div class="detail-item">
+                <i class="fas fa-user"></i>
+                <div class="detail-content">
+                  <label>Seller</label>
+                  <!-- <span>{{ property.seller }}</span> -->
+                </div>
+              </div>
+  
+              <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="detail-content">
+                  <label>Location</label>
+                  <span>{{ property.location }}</span>
+                </div>
+              </div>
+  
+              <div class="detail-item">
+                <i class="fas fa-dollar-sign"></i>
+                <div class="detail-content">
+                  <label>Price</label>
+                  <span>{{ property.price | currency }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="card-actions">
+            <button class="btn-action" (click)="viewDetails(property.id)">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn-action edit">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn-action delete">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

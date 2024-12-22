@@ -40,7 +40,7 @@ export class RegistrationComponent {
     this.authService.register(userData).subscribe({
       next: (response) => {
         this.authService.setToken(response.token);
-        this.router.navigate(['/profile']); // Redirect to profile after registration
+        this.router.navigate(['/landing-page']); // Redirect to profile after registration
       },
       error: (err) => {
         if (err.status === 400 && err.error?.message) {

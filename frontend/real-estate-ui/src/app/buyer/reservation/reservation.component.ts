@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ReservationService } from '../../services/reservationService/reservation.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,10 +8,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent implements OnInit {
-  propertyId!: string;
-  reservations: any[] = [];
-  newReservation: any = {};
-  isLoading = false;
+  @Input() propertyId: string = ''; // Receives propertyId from parent component
+  @Input() userId: string = ''; // Receives userId from parent component
+  @Output() reservationComplete = new EventEmitter<boolean>(); // To notify the parent component of completion
+
+  newReservation: any = {
+    checkIn: '',
+    checkOut: '',
+  };
 
   constructor(
     private reservationService: ReservationService,
@@ -19,33 +23,38 @@ export class ReservationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.propertyId = this.route.snapshot.paramMap.get('propertyId') || '';
-    this.loadReservations();
-  }
-
-  loadReservations(): void {
-    this.isLoading = true;
-    this.reservationService.getReservationsByPropertyId(this.propertyId).subscribe({
-      next: (reservations) => {
-        this.reservations = reservations;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Error loading reservations:', err);
-        this.isLoading = false;
+    // Retrieve the user object from localStorage
+    const user = localStorage.getItem('user');
+    
+    if (user) {
+      const parsedUser = JSON.parse(user); // Parse the JSON string to an object
+      this.userId = parsedUser.userId;     // Access the userId property within the object
+      
+      if (!this.userId) {
+        console.error('User ID is missing in the user object');
       }
-    });
+    } else {
+      console.error('User not logged in');
+    }
   }
+  
 
   createReservation(): void {
-    this.newReservation.propertyId = this.propertyId;
-    this.reservationService.createReservation(this.newReservation).subscribe({
+    if (!this.userId || !this.propertyId) {
+      console.error('Missing user or property ID');
+      return;
+    }
+
+    //send the reservation data to the backend 
+    this.reservationService.createReservation(this.userId, this.propertyId, this.newReservation).subscribe({
       next: () => {
-        this.loadReservations();
-        this.newReservation = {};
+        alert('Reservation created successfully!');
+        this.reservationComplete.emit(true); // Notify parent of successful reservation
       },
       error: (err) => {
         console.error('Error creating reservation:', err);
+        alert('Failed to create reservation. Please try again.');
+
       }
     });
   }

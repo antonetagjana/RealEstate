@@ -50,7 +50,7 @@
     <h2>Search Results</h2>
     <div class="results-count">{{ properties.length }} properties found</div>
     <div *ngIf="isLoading">Loading properties...</div>
-    <div *ngIf="!isLoading"class="property-list">
+    <div *ngIf="!isLoading" class="property-list">
       <div class="property-card" *ngFor="let property of properties">
         <img [src]="property.image" [alt]="property.title" class="property-image">
         <div class="property-details">

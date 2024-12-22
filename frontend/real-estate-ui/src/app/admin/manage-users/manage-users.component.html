@@ -1,0 +1,39 @@
+<div class="manage-users">
+    <header class="header">
+      <div class="header-content">
+        <h1>Menaxho Përdoruesit</h1>
+        <button class="btn-back" routerLink="/admin/dashboard">
+          <i class="fas fa-arrow-left"></i> Kthehu në Dashboard
+        </button>
+      </div>
+    </header>
+  
+    <!-- Show loading spinner when data is loading -->
+    <div class="loading-container" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+  
+    <!-- Show users list when loading is done -->
+    <div class="users-list" *ngIf="!loading && users.length > 0">
+      <div class="user-card" *ngFor="let user of users">
+        <div class="user-content">
+          <h2>{{ user.name }}</h2>
+          <p>Email: {{ user.email }}</p>
+          <p>Status: <span [class]="getStatusClass(user.status)">{{ user.status }}</span></p>
+          <p>Regjistruar më: {{ user.createdAt | date: 'medium' }}</p>
+  
+          <div class="user-actions">
+            <button class="btn-view" (click)="viewUserDetails(user.id)">
+              Shiko Detajet
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Display a message when no users are available -->
+    <div *ngIf="!loading && users.length === 0">
+      <p>No users available.</p>
+    </div>
+  </div>
+  

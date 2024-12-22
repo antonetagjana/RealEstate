@@ -18,7 +18,7 @@ export class AuthService {
         const token = response.token;
         this.setToken(token);
         this.fetchAndStoreUserById();
-        return response;
+       return response;
       })
     );
   }
@@ -51,8 +51,7 @@ export class AuthService {
 
   // Funksioni për logout
   logout(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user'); // Remove user data as well
+    localStorage.clear();
   }
 
   // Kontrollon nëse përdoruesi është i autentikuar
