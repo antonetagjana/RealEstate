@@ -28,13 +28,19 @@ public class PropertyRepository : IPropertyRepository
 
     public async Task<Prona?> GetByIdAsync(Guid propertyId)
     {
-        return await _dbContext.Properties.FindAsync(propertyId);
+        return await _dbContext.Properties
+            .Include(p => p.Photos)
+            .FirstOrDefaultAsync(p => p.PropertyId == propertyId);
     }
+
 
     public async Task<IEnumerable<Prona>> GetAllAsync()
     {
-        return await _dbContext.Properties.ToListAsync();
+        return await _dbContext.Properties
+            .Include(p => p.Photos) // Ensure photos are loaded
+            .ToListAsync();
     }
+
 
     public async Task AddAsync(Prona property)
     {
@@ -47,6 +53,28 @@ public class PropertyRepository : IPropertyRepository
         _dbContext.Properties.Update(property);
         await _dbContext.SaveChangesAsync();
     }
+    public async Task<IEnumerable<Prona>> GetPropertiesByLocationAsync(string location)
+    {
+        try
+        {
+            // Convert search term to lowercase for case-insensitive search
+            location = location.ToLower();
+
+            return await _dbContext.Properties
+                .Include(p => p.Photos)
+                .Where(p => p.Location.ToLower().Contains(location))
+                .Where(p => p.IsAvailable)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            // Log the error
+            throw;
+        }
+    }
+
+
+
 
     public async Task DeleteAsync(Guid propertyId)
     {
@@ -57,4 +85,32 @@ public class PropertyRepository : IPropertyRepository
             await _dbContext.SaveChangesAsync();
         }
     }
+     public async Task<IEnumerable<Prona>> GetFilteredPropertiesAsync(
+            decimal? minPrice, 
+            decimal? maxPrice, 
+            string? category, 
+            string? location, 
+            int? floors)
+        {
+            // Krijo një query të bazuar në filtrat e dhënë
+            var query = _dbContext.Properties.AsQueryable();
+    
+            if (minPrice.HasValue)
+                query = query.Where(p => p.Price >= minPrice.Value);
+    
+            if (maxPrice.HasValue)
+                query = query.Where(p => p.Price <= maxPrice.Value);
+    
+            if (!string.IsNullOrEmpty(category))
+                query = query.Where(p => p.Category == category);
+    
+            if (!string.IsNullOrEmpty(location))
+                query = query.Where(p => p.Location.Contains(location));
+    
+            if (floors.HasValue)
+                query = query.Where(p => p.Floors == floors.Value);
+    
+            // Kthe rezultatin
+            return await query.ToListAsync();
+        }
 }

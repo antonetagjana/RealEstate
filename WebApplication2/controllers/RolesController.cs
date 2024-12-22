@@ -8,7 +8,7 @@ using WebApplication2.Services.Role;
 
 namespace WebApplication2.Controllers
 {
-    [Authorize(Policy = "AdminPolicy")]
+    // [Authorize(Policy = "AdminPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController(IRoleService roleService) : ControllerBase

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.DTOs;
 using WebApplication2.Services.User;
@@ -12,24 +12,23 @@ namespace WebApplication2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    // [EnableCors]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IPropertyService _propertyService;
         private readonly IRoleService _roleService;
         private readonly EmailService _emailService;
-        private readonly UserManager<User> _userManager;
 
-        public UserController(IUserService userService, IPropertyService propertyService,IRoleService roleService,EmailService emailService,UserManager<User> userManager)
+        public UserController(IUserService userService, IPropertyService propertyService,IRoleService roleService,EmailService emailService)
         {
             _userService = userService;
             _propertyService = propertyService;
             _roleService= roleService;
             _emailService = emailService;
-            _userManager = userManager;
         }
         
-        [Authorize(Policy = "MustBeAdminOrUser")]
+        // [Authorize(Policy = "MustBeAdminOrUser")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {
@@ -38,7 +37,6 @@ namespace WebApplication2.Controllers
     
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
     
-            // Kontrollo nëse është Admin ose po kërkon profilin e vet
             if (currentUserId != id.ToString() && !User.IsInRole("Admin"))
             {
                 return Forbid();
@@ -47,8 +45,17 @@ namespace WebApplication2.Controllers
             return Ok(user);
             
         }
+        [HttpGet("count")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUserCount()
+        {
+            var count = await _userService.GetUserCountAsync();
+            Console.WriteLine($"Sending user count: {count}");
+            return Ok(count);
+        }
+
         
-        [Authorize(Policy = "AdminPolicy")]
+        // [Authorize(Policy = "AdminPolicy")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
@@ -65,53 +72,32 @@ namespace WebApplication2.Controllers
                 return BadRequest("User already exists.");
             }
             
-            // Kontrollo nëse fjalëkalimi përmbush kriteret e sigurisë
+            
             if (!IsPasswordValid(userCreateDto.Password))
             {
-                return BadRequest("Password does not meet security requirements. It must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.");
-            }
-
-            if (await _userService.UserExists(userCreateDto.Email))
-            {
-                return BadRequest("User already exists.");
+                return BadRequest(new { message = "Password does not meet security requirements. It must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit." });
             }
             
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(userCreateDto.Password);
             var user = new User
             {
                 FullName = userCreateDto.FullName,
                 Email = userCreateDto.Email,
-                Password= userCreateDto.Password,
+                PasswordHash= hashedPassword,
                 PhoneNumber = userCreateDto.PhoneNumber,
+                Role = userCreateDto.Role
             };
-            
-            // Krijo listën e roleve për përdoruesin
-            var userRoles = new List<UserRole>();
 
-            foreach (var roleName in userCreateDto.Roles)
-            {
-                var role = await _roleService.FindRoleByRoleNameAsync(roleName.ToLower());
-                if (role == null)
-                {
-                    return NotFound($"Role '{roleName}' not found.");
-                }
-
-                userRoles.Add(new UserRole { RoleId = role.RoleId, UserId = user.UserId });
-            }
-
-            user.UserRoles = userRoles; // Lidh të gjitha rolet me përdoruesin
-
-            // Ruaj përdoruesin e ri dhe rolet e tij
+          
             await _userService.AddUserAsync(user);
             
-            // Gjenero token-in e konfirmimit dhe dërgo email-in
-            var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            await _emailService.SendConfirmationEmailAsync(user.UserId.ToString(), user.Email, confirmationToken);
+            // Gjenero token e konfirmimit dhe dërgo email
+            // var confirmationToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            // await _emailService.SendConfirmationEmailAsync(user.UserId.ToString(), user.Email, confirmationToken);
 
 
-            return CreatedAtAction(nameof(GetUserById), new { id = user.UserId }, user);
-
-            
-            }
+            return Ok(new { message = "User registered successfully." });
+        }
         
         [Authorize(Policy = "AuthenticatedUserPolicy")]
         [HttpPut("{id}")]
@@ -133,10 +119,10 @@ namespace WebApplication2.Controllers
         
         private bool IsPasswordValid(string password)
         {
-            if (password.Length < 8) return false; // Minimumi 8 karaktere
-            if (!password.Any(char.IsLower)) return false; // Të paktën një shkronjë të vogël
-            if (!password.Any(char.IsUpper)) return false; // Të paktën një shkronjë të madhe
-            if (!password.Any(char.IsDigit)) return false; // Të paktën një numër
+            if (password.Length < 8) return false; 
+            if (!password.Any(char.IsLower)) return false; 
+            if (!password.Any(char.IsUpper)) return false; 
+            if (!password.Any(char.IsDigit)) return false; 
 
             return true;
         }

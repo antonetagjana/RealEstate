@@ -20,9 +20,9 @@ public class JwtTokenService:IJwtTokenService
     {
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()),
+            new Claim(JwtRegisteredClaimNames.NameId, user.UserId.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role)
+            new Claim(JwtRegisteredClaimNames.Profile, user.Role)
         };
         
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]?? throw new InvalidOperationException("Jwt Key is missing")));
@@ -32,11 +32,11 @@ public class JwtTokenService:IJwtTokenService
             issuer: _configuration["Jwt:Issuer"],
             audience: _configuration["Jwt:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(3), // kohëzgjatja e token-it
-            signingCredentials: creds
+            expires: DateTime.Now.AddHours(3),
+            signingCredentials: creds   //Perdor nje celes per te nenshkruar token dhe te sigurohet qe eshte i vertete
         );
         
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return new JwtSecurityTokenHandler().WriteToken(token); //tokeni qe dergohet tek perdoruesi 
     }
 
     public string GenerateToken(string userId)

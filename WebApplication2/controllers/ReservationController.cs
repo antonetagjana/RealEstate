@@ -4,38 +4,55 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication2.DTOs;
 using WebApplication2.models;
 using WebApplication2.Services.Reservation;
+using WebApplication2.Data;
 
 namespace WebApplication2.controllers
 {
-    [Authorize] 
     [ApiController]
     [Route("api/[controller]")]
-    public class ReservationController(IReservationService reservationService) : ControllerBase
+    public class ReservationController : ControllerBase
     {
-        [Authorize(Policy = "MustBeAdminOrSeller")] 
+        private readonly ApplicationDbContext _context;
+        private readonly IReservationService _reservationService;
+
+        public ReservationController(ApplicationDbContext context, IReservationService reservationService)
+        {
+            _context = context;
+            _reservationService = reservationService;
+        }
+
+        [Authorize(Policy = "MustBeAdminOrSeller")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetReservationById(Guid id)
         {
-            var reservation = await reservationService.GetByIdAsync(id);
+            var reservation = await _reservationService.GetByIdAsync(id);
             if (reservation == null) return NotFound();
 
-            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (currentUserId != reservation.UserId.ToString() && 
-                !User.IsInRole("Admin") && 
+            if (currentUserId != reservation.UserId.ToString() &&
+                !User.IsInRole("Admin") &&
                 !User.IsInRole("Seller"))
             {
-                return Forbid(); 
+                return Forbid();
             }
 
             return Ok(reservation);
         }
 
-        [Authorize(Policy = "MustBeAdminOrSeller")]
+        [HttpGet("count")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetReservationCount()
+        {
+            var count = await _reservationService.GetReservationCountAsync();
+            return Ok(count);
+        }
+
+        // [Authorize(Policy = "MustBeAdminOrSeller")]
         [HttpGet]
         public async Task<IActionResult> GetAllReservations()
         {
-            var reservations = await reservationService.GetAllAsync();
+            var reservations = await _reservationService.GetAllAsync();
             return Ok(reservations);
         }
 
@@ -54,50 +71,62 @@ namespace WebApplication2.controllers
                 Status = ReservationStatus.Pending
             };
 
-            await reservationService.AddAsync(reservation);
+            await _reservationService.AddAsync(reservation);
             return CreatedAtAction(nameof(GetReservationById), new { id = reservation.ReservationId }, reservation);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateReservation(Guid id, [FromBody] ReservationUpdateDTO reservationUpdateDto, ReservationStatus newStatus)
         {
-            var reservation = await reservationService.GetByIdAsync(id);
+            var reservation = await _reservationService.GetByIdAsync(id);
             if (reservation == null)
             {
-                return NotFound("Reservation not found ");
+                return NotFound("Reservation not found");
             }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (currentUserId != reservation.UserId.ToString() && 
+            if (currentUserId != reservation.UserId.ToString() &&
                 !User.IsInRole("Admin"))
             {
-                return Forbid(); 
+                return Forbid();
             }
 
             reservation.CheckIn = reservationUpdateDto.CheckIn;
             reservation.CheckOut = reservationUpdateDto.CheckOut;
             reservation.Status = newStatus;
 
-            await reservationService.UpdateAsync(reservation);
+            await _reservationService.UpdateAsync(reservation);
             return NoContent();
         }
-
-        [Authorize] 
+            // Merr numrin e rezervimeve të konfirmuara për seller-in e loguar
+            /*
+            [HttpGet("count-confirmed")]
+            public async Task<IActionResult> GetConfirmedReservationsCount()
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var count = await _context.Reservations
+                    .Where(r => r.userId == userId && r.Status == "confirmed")
+                    .CountAsync();
+        
+                return Ok(count);
+            }
+            */
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteReservation(Guid id)
         {
-            var reservation = await reservationService.GetByIdAsync(id);
+            var reservation = await _reservationService.GetByIdAsync(id);
             if (reservation == null)
                 return NotFound();
 
-            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (currentUserId != reservation.UserId.ToString() && !User.IsInRole("Admin"))
             {
-                return Forbid(); 
+                return Forbid();
             }
 
-            await reservationService.DeleteAsync(id);
+            await _reservationService.DeleteAsync(id);
             return NoContent();
         }
     }

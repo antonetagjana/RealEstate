@@ -11,7 +11,7 @@ public class UserRoleService(IUserRoleRepository userRoleRepository) : IUserRole
 {
     private readonly IUserRoleRepository _userRoleRepository = userRoleRepository;
 
-    public Task<UserRole?> GetByIdAsync(Guid userId, Guid roleId)
+    public Task<UserRole?> GetByIdAsync(Guid userId,Guid roleId)
     {
         return _userRoleRepository.GetByIdAsync(userId, roleId);
     }

@@ -10,7 +10,6 @@ public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
     {
         return await dbContext.Users.Include(u => u.Properties)
             .Include(u => u.Reservations)
-            .Include(u => u.Notifications)
             .FirstOrDefaultAsync(u => u.UserId == userId);
     }
     public async Task saveChangesAsync()

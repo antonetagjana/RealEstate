@@ -16,6 +16,11 @@ public class UserService(IUserRepository userRepository,ApplicationDbContext dbC
     {
         return userRepository.GetByIdAsync(userId);
     }
+    public async Task<int> GetUserCountAsync()
+    {
+        return await dbContext.Users.CountAsync();
+    }
+
 
     public Task<IEnumerable<User>> GetAllUsersAsync()
     {

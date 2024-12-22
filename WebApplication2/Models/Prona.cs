@@ -27,7 +27,7 @@ public class Prona
 
     
     public User user { get; set; } 
-    public Guid UserId { get; set; } 
+    public Guid? UserId { get; set; } 
     
     
     public List<PropertyPhoto> Photos { get; set; } = new List<PropertyPhoto>();

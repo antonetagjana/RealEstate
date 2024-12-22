@@ -12,6 +12,4 @@ public class PropertyCreateDTO
     public bool IsPromoted { get; set; } = false;
     public bool IsAvailable { get; set; } = true;
     
-    public Guid UserId{ get; set; }
-    
 }

@@ -13,5 +13,9 @@ namespace WebApplication2.Services.Property
         Task UpdateAsync(Prona property);
         Task DeleteAsync(Guid propertyId);
         Task<IEnumerable<Prona>> GetPropertiesBySellerIdAsync(Guid sellerId);
+        Task<int> GetPropertyCountAsync();
+        Task<IEnumerable<Prona>> GetPropertiesByLocationAsync(string location);
+
+        Task<IEnumerable<Prona>> GetFilteredPropertiesAsync(decimal? minPrice, decimal? maxPrice, string? propertyType, string? location, int? rooms);
     }
 }

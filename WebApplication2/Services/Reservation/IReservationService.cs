@@ -8,4 +8,5 @@ public interface IReservationService
     Task AddAsync(Reservation reservation);
     Task UpdateAsync(Reservation reservation);
     Task DeleteAsync(Guid reservationId);
+    Task<int> GetReservationCountAsync();
 }

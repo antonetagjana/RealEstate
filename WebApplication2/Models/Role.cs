@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace WebApplication2.models;
 
 public class Role

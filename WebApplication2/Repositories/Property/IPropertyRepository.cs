@@ -11,6 +11,7 @@ public interface IPropertyRepository
     Task DeleteAsync(Guid propertyId);
     Task saveChanges();
     Task<IEnumerable<Prona>> GetPropertiesBySellerIdAsync(Guid sellerId);
-    
-  
+    Task<IEnumerable<Prona>> GetFilteredPropertiesAsync(decimal? minPrice, decimal? maxPrice, string? propertyType, string? location, int? rooms);
+    Task<IEnumerable<Prona>> GetPropertiesByLocationAsync(string location);
+
 }

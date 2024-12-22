@@ -12,11 +12,15 @@ public class ReservationRepository(ApplicationDbContext dbContext) : IReservatio
             .Include(r => r.User)
             .FirstOrDefaultAsync(r => r.ReservationId == reservationId);
     }
-
+    
     public async Task<IEnumerable<Reservation>> GetAllAsync()
     {
-        return await dbContext.Reservations.ToListAsync();
+        return await dbContext.Reservations
+            .Include(r => r.User)    // Eager load the associated User
+            .Include(r => r.Property) // Eager load the associated Property
+            .ToListAsync();          // Get the list of reservations
     }
+
 
     public async Task AddAsync(Reservation reservation)
     {

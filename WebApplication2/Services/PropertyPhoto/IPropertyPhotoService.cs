@@ -8,4 +8,6 @@ public interface IPropertyPhotoService
     Task AddAsync(PropertyPhoto propertyPhoto);
     Task UpdateAsync(PropertyPhoto propertyPhoto);
     Task DeleteAsync(Guid photoId);  
+    Task<string> SavePhotoAsync(IFormFile file);
+
 }

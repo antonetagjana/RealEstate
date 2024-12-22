@@ -12,4 +12,5 @@ public interface IUserService
     Task DeleteUserAsync(Guid userId);
     Task <User?>GetUserByEmailAsync(string email);
     Task<bool> UserExists(object email);
+    Task <int>  GetUserCountAsync();
 }

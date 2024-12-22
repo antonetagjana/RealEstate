@@ -57,25 +57,21 @@ public class AuthController: ControllerBase
         {
             return Unauthorized("Invalid credintials");
         }
-        
-        // Kontrollo nëse përdoruesi është i bllokuar
-
         if (user.LockoutEndTime.HasValue && user.LockoutEndTime > DateTime.UtcNow)
         {
             return Unauthorized("Account is locked. Please try again later.");
         }
         
-        // Verifikimi i fjalëkalimit duke përdorur BCrypt
-        bool isValidPassword = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password);
+        // Verifikim i password
+        bool isValidPassword = BCrypt.Net.BCrypt.Verify(loginDto.Password, user.PasswordHash);
         if (!isValidPassword)
         {
-            // Përditëso tentativat e dështuara
             user.FailedLoginAttempts++;
             if (user.FailedLoginAttempts >= 5)
             {
-                user.LockoutEndTime = DateTime.UtcNow.AddMinutes(10); // Blloko për 10 minuta
+                user.LockoutEndTime = DateTime.UtcNow.AddMinutes(10); 
             }
-            await _userService.UpdateUserAsync(user); // Ruaj ndryshimet në databazë
+            await _userService.UpdateUserAsync(user); 
             return Unauthorized("Invalid credentials");
         }
         // Nëse login-i është i suksesshëm, rivendos tentativat e dështuara
@@ -86,7 +82,7 @@ public class AuthController: ControllerBase
         
         var token = _jwtTokenService.GenerateToken(user);
         
-        return Ok(new{Token=token});
+        return Ok(new{Token=token,UserId = user.UserId,Role= user.Role});
     }
 [HttpPost("logout")]
     public async Task<IActionResult> Logout()
